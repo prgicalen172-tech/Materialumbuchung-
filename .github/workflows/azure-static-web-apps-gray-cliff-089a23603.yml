@@ -39,5 +39,5 @@ jobs:
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ec40c76060985d8bee0d40a6b38950ed776ac16e5f4f13fc3b4c4c0fa480065901-07f8d835-d5ff-425a-81fd-20d4c31d7e750030309089a23603
-          action: "close"
+         azure_static_web_apps_api_token: ${{ b9e50eb97a592a2f05a9865991b5baef6f4412b6f2934e7ac3e53a2cc12f105c01-aa7324af-c7b6-4a23-a804-21c95c3388f90030309089a23603 }}
+action: "close"
