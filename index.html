@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1769d1">
+<title>Materialumbuchung – Offline</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#eef2f6;margin:0;padding:max(12px,env(safe-area-inset-top)) 12px max(16px,env(safe-area-inset-bottom));color:#17202a;min-height:100dvh;-webkit-text-size-adjust:100%}
+.card{width:100%;max-width:560px;margin:auto;background:#fff;border-radius:20px;padding:18px;box-shadow:0 3px 16px rgba(0,0,0,.12)}
+h1{text-align:center;font-size:25px;margin:5px 0 22px}
+label{display:block;font-weight:800;font-size:14px;margin:15px 0 7px}
+input,select{width:100%;height:56px;border:1px solid #c7d0d9;border-radius:12px;padding:0 14px;font-size:18px;background:#fff;-webkit-appearance:none;appearance:none;touch-action:manipulation}select{background-image:linear-gradient(45deg,transparent 50%,#68737d 50%),linear-gradient(135deg,#68737d 50%,transparent 50%);background-position:calc(100% - 20px) 24px,calc(100% - 14px) 24px;background-size:6px 6px,6px 6px;background-repeat:no-repeat;padding-right:40px}
+button,.mailButton{display:block;width:100%;min-height:58px;height:auto;border:0;border-radius:14px;background:#1769d1;color:#fff;font-size:18px;font-weight:800;margin-top:20px;padding:14px 12px;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.secondary{background:#68737d;margin-top:10px}
+#status{text-align:center;font-weight:700;margin-top:12px;min-height:22px;line-height:1.35}
+.note{font-size:12px;color:#697681;text-align:center;line-height:1.4;margin-top:12px}
+</style>
+
+<style>
+@media (max-width:380px){
+  body{padding-left:8px;padding-right:8px}
+  .card{padding:14px;border-radius:16px}
+  h1{font-size:22px;margin-bottom:18px}
+  label{font-size:13px;margin-top:13px}
+  input,select{font-size:17px;height:54px}
+  button,.mailButton{font-size:17px;min-height:56px}
+}
+@media (min-width:700px){
+  body{padding:24px}
+  .card{padding:24px}
+}
+</style>
+
+<style>
+.material-list{display:flex;flex-direction:column;gap:10px}
+.material-row{display:grid;grid-template-columns:1.5fr 1fr;gap:10px}
+.material-row input{margin:0}
+@media (max-width:380px){
+  .material-row{grid-template-columns:1.35fr 1fr;gap:7px}
+}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>Materialumbuchung</h1>
+
+<label>Von Lager</label>
+<select id="von"><option value="">Bitte auswählen</option><option value="0110">0110</option>
+<option value="0113">0113</option>
+<option value="0114">0114</option>
+<option value="0115">0115</option>
+<option value="0117">0117</option>
+<option value="0118">0118</option>
+<option value="0119">0119</option>
+<option value="0120">0120</option>
+<option value="0121">0121</option>
+<option value="0126">0126</option>
+<option value="0127">0127</option>
+<option value="0128">0128</option>
+<option value="0129">0129</option>
+<option value="0130">0130</option>
+<option value="0136">0136</option>
+<option value="0137">0137</option>
+<option value="0138">0138</option>
+<option value="0139">0139</option>
+<option value="0140">0140</option>
+<option value="0141">0141</option>
+<option value="0143">0143</option>
+<option value="0144">0144</option>
+<option value="0146">0146</option>
+<option value="0148">0148</option>
+<option value="0153">0153</option>
+<option value="0154">0154</option>
+<option value="0155">0155</option>
+<option value="0156">0156</option>
+<option value="0160">0160</option>
+<option value="0161">0161</option>
+<option value="0164">0164</option>
+<option value="0168">0168</option>
+<option value="0170">0170</option>
+<option value="0172">0172</option>
+<option value="0173">0173</option>
+<option value="0180">0180</option>
+<option value="0181">0181</option>
+<option value="0182">0182</option>
+<option value="0183">0183</option>
+<option value="0310">0310</option>
+<option value="0311">0311</option>
+<option value="0312">0312</option>
+<option value="0313">0313</option>
+<option value="0314">0314</option>
+<option value="0315">0315</option>
+<option value="0316">0316</option>
+<option value="0317">0317</option>
+<option value="0318">0318</option>
+<option value="0322">0322</option>
+<option value="0380">0380</option>
+<option value="0381">0381</option>
+<option value="0382">0382</option>
+<option value="0383">0383</option>
+<option value="0511">0511</option>
+<option value="0512">0512</option>
+<option value="0513">0513</option>
+<option value="0515">0515</option>
+<option value="0516">0516</option>
+<option value="0518">0518</option>
+<option value="0520">0520</option>
+<option value="0521">0521</option>
+<option value="0522">0522</option>
+<option value="0580">0580</option>
+<option value="0581">0581</option>
+<option value="0582">0582</option>
+<option value="0583">0583</option>
+<option value="0410">0410</option>
+<option value="0411">0411</option>
+<option value="0413">0413</option>
+<option value="0414">0414</option>
+<option value="0416">0416</option>
+<option value="0417">0417</option>
+<option value="0418">0418</option>
+<option value="0419">0419</option>
+<option value="0420">0420</option>
+<option value="0421">0421</option>
+<option value="0423">0423</option>
+<option value="0424">0424</option>
+<option value="0425">0425</option>
+<option value="0426">0426</option>
+<option value="0428">0428</option>
+<option value="0429">0429</option>
+<option value="0430">0430</option>
+<option value="0431">0431</option>
+<option value="0432">0432</option>
+<option value="0433">0433</option>
+<option value="0435">0435</option>
+<option value="0480">0480</option>
+<option value="0481">0481</option>
+<option value="0482">0482</option>
+<option value="0483">0483</option>
+<option value="0611">0611</option>
+<option value="0612">0612</option>
+<option value="0613">0613</option>
+<option value="0614">0614</option>
+<option value="0615">0615</option>
+<option value="0617">0617</option>
+<option value="0618">0618</option>
+<option value="0619">0619</option>
+<option value="0622">0622</option>
+<option value="0623">0623</option>
+<option value="0624">0624</option>
+<option value="0626">0626</option>
+<option value="0680">0680</option>
+<option value="0681">0681</option>
+<option value="0682">0682</option>
+<option value="0683">0683</option>
+<option value="0706">0706</option>
+<option value="0707">0707</option>
+<option value="0713">0713</option>
+<option value="0714">0714</option>
+<option value="0715">0715</option>
+<option value="0717">0717</option>
+<option value="0718">0718</option>
+<option value="0719">0719</option>
+<option value="0780">0780</option>
+<option value="0781">0781</option>
+<option value="0782">0782</option>
+<option value="0783">0783</option>
+<option value="0926">0926</option>
+<option value="0810">0810</option>
+<option value="0811">0811</option>
+<option value="0812">0812</option>
+<option value="0813">0813</option>
+<option value="0814">0814</option>
+<option value="0815">0815</option>
+<option value="0816">0816</option>
+<option value="0818">0818</option>
+<option value="0820">0820</option>
+<option value="0822">0822</option>
+<option value="0824">0824</option>
+<option value="0826">0826</option>
+<option value="0830">0830</option>
+<option value="0831">0831</option>
+<option value="0880">0880</option>
+<option value="0881">0881</option>
+<option value="0882">0882</option>
+<option value="0883">0883</option></select>
+
+<label>Nach Lager</label>
+<select id="nach"><option value="">Bitte auswählen</option><option value="0110">0110</option>
+<option value="0113">0113</option>
+<option value="0114">0114</option>
+<option value="0115">0115</option>
+<option value="0117">0117</option>
+<option value="0118">0118</option>
+<option value="0119">0119</option>
+<option value="0120">0120</option>
+<option value="0121">0121</option>
+<option value="0126">0126</option>
+<option value="0127">0127</option>
+<option value="0128">0128</option>
+<option value="0129">0129</option>
+<option value="0130">0130</option>
+<option value="0136">0136</option>
+<option value="0137">0137</option>
+<option value="0138">0138</option>
+<option value="0139">0139</option>
+<option value="0140">0140</option>
+<option value="0141">0141</option>
+<option value="0143">0143</option>
+<option value="0144">0144</option>
+<option value="0146">0146</option>
+<option value="0148">0148</option>
+<option value="0153">0153</option>
+<option value="0154">0154</option>
+<option value="0155">0155</option>
+<option value="0156">0156</option>
+<option value="0160">0160</option>
+<option value="0161">0161</option>
+<option value="0164">0164</option>
+<option value="0168">0168</option>
+<option value="0170">0170</option>
+<option value="0172">0172</option>
+<option value="0173">0173</option>
+<option value="0180">0180</option>
+<option value="0181">0181</option>
+<option value="0182">0182</option>
+<option value="0183">0183</option>
+<option value="0310">0310</option>
+<option value="0311">0311</option>
+<option value="0312">0312</option>
+<option value="0313">0313</option>
+<option value="0314">0314</option>
+<option value="0315">0315</option>
+<option value="0316">0316</option>
+<option value="0317">0317</option>
+<option value="0318">0318</option>
+<option value="0322">0322</option>
+<option value="0380">0380</option>
+<option value="0381">0381</option>
+<option value="0382">0382</option>
+<option value="0383">0383</option>
+<option value="0511">0511</option>
+<option value="0512">0512</option>
+<option value="0513">0513</option>
+<option value="0515">0515</option>
+<option value="0516">0516</option>
+<option value="0518">0518</option>
+<option value="0520">0520</option>
+<option value="0521">0521</option>
+<option value="0522">0522</option>
+<option value="0580">0580</option>
+<option value="0581">0581</option>
+<option value="0582">0582</option>
+<option value="0583">0583</option>
+<option value="0410">0410</option>
+<option value="0411">0411</option>
+<option value="0413">0413</option>
+<option value="0414">0414</option>
+<option value="0416">0416</option>
+<option value="0417">0417</option>
+<option value="0418">0418</option>
+<option value="0419">0419</option>
+<option value="0420">0420</option>
+<option value="0421">0421</option>
+<option value="0423">0423</option>
+<option value="0424">0424</option>
+<option value="0425">0425</option>
+<option value="0426">0426</option>
+<option value="0428">0428</option>
+<option value="0429">0429</option>
+<option value="0430">0430</option>
+<option value="0431">0431</option>
+<option value="0432">0432</option>
+<option value="0433">0433</option>
+<option value="0435">0435</option>
+<option value="0480">0480</option>
+<option value="0481">0481</option>
+<option value="0482">0482</option>
+<option value="0483">0483</option>
+<option value="0611">0611</option>
+<option value="0612">0612</option>
+<option value="0613">0613</option>
+<option value="0614">0614</option>
+<option value="0615">0615</option>
+<option value="0617">0617</option>
+<option value="0618">0618</option>
+<option value="0619">0619</option>
+<option value="0622">0622</option>
+<option value="0623">0623</option>
+<option value="0624">0624</option>
+<option value="0626">0626</option>
+<option value="0680">0680</option>
+<option value="0681">0681</option>
+<option value="0682">0682</option>
+<option value="0683">0683</option>
+<option value="0706">0706</option>
+<option value="0707">0707</option>
+<option value="0713">0713</option>
+<option value="0714">0714</option>
+<option value="0715">0715</option>
+<option value="0717">0717</option>
+<option value="0718">0718</option>
+<option value="0719">0719</option>
+<option value="0780">0780</option>
+<option value="0781">0781</option>
+<option value="0782">0782</option>
+<option value="0783">0783</option>
+<option value="0926">0926</option>
+<option value="0810">0810</option>
+<option value="0811">0811</option>
+<option value="0812">0812</option>
+<option value="0813">0813</option>
+<option value="0814">0814</option>
+<option value="0815">0815</option>
+<option value="0816">0816</option>
+<option value="0818">0818</option>
+<option value="0820">0820</option>
+<option value="0822">0822</option>
+<option value="0824">0824</option>
+<option value="0826">0826</option>
+<option value="0830">0830</option>
+<option value="0831">0831</option>
+<option value="0880">0880</option>
+<option value="0881">0881</option>
+<option value="0882">0882</option>
+<option value="0883">0883</option></select>
+
+<label>Materialien</label>
+<div class="material-list">
+  <div class="material-row">
+    <input id="material1" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" placeholder="Materialnummer 1">
+    <input id="menge1" type="number" inputmode="decimal" min="0.01" step="any" placeholder="Menge 1">
+  </div>
+  <div class="material-row">
+    <input id="material2" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" placeholder="Materialnummer 2">
+    <input id="menge2" type="number" inputmode="decimal" min="0.01" step="any" placeholder="Menge 2">
+  </div>
+  <div class="material-row">
+    <input id="material3" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" placeholder="Materialnummer 3">
+    <input id="menge3" type="number" inputmode="decimal" min="0.01" step="any" placeholder="Menge 3">
+  </div>
+  <div class="material-row">
+    <input id="material4" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" placeholder="Materialnummer 4">
+    <input id="menge4" type="number" inputmode="decimal" min="0.01" step="any" placeholder="Menge 4">
+  </div>
+  <div class="material-row">
+    <input id="material5" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" placeholder="Materialnummer 5">
+    <input id="menge5" type="number" inputmode="decimal" min="0.01" step="any" placeholder="Menge 5">
+  </div>
+</div>
+
+<a id="emailButton" class="mailButton" href="mailto:BAT-ServiceLogistik-Ost-IN">✉ E-MAIL-APP ÖFFNEN</a>
+<button class="secondary" onclick="loeschen()">Eingaben löschen</button>
+
+<div id="status"></div>
+<div class="note">
+Offline nutzbar. Die Eingaben werden automatisch auf diesem Gerät gespeichert.<br>
+Beim Tippen wird die auf dem Gerät eingerichtete E-Mail-App mit einer fertigen E-Mail geöffnet.
+</div>
+</div>
+
+<script>
+const KEY = "materialumbuchung_offline_v2";
+const recipient = "BAT-ServiceLogistik-Ost-IN";
+const ids = ["von", "nach", "material1", "menge1", "material2", "menge2", "material3", "menge3", "material4", "menge4", "material5", "menge5"];
+
+function el(id) {
+  return document.getElementById(id);
+}
+
+function speichern() {
+  try {
+    const data = {};
+    ids.forEach(id => data[id] = el(id).value);
+    localStorage.setItem(KEY, JSON.stringify(data));
+  } catch (e) {
+    console.warn("Speichern nicht möglich:", e);
+  }
+}
+
+function laden() {
+  try {
+    const data = JSON.parse(localStorage.getItem(KEY) || "{}");
+    ids.forEach(id => {
+      if (data[id] !== undefined) el(id).value = data[id];
+    });
+  } catch (e) {
+    console.warn("Laden nicht möglich:", e);
+  }
+}
+
+function setzenStatus(text, fehler = false) {
+  const status = el("status");
+  status.textContent = text;
+  status.style.color = fehler ? "#c62828" : "";
+}
+
+function senden() {
+  const von = el("von").value.trim();
+  const nach = el("nach").value.trim();
+
+  if (!von || !nach) {
+    setzenStatus("Bitte Von Lager und Nach Lager auswählen.", true);
+    return false;
+  }
+
+  if (von === nach) {
+    setzenStatus("Von Lager und Nach Lager dürfen nicht identisch sein.", true);
+    return false;
+  }
+
+  const positionen = [];
+  for (let i = 1; i <= 5; i++) {
+    const material = el("material" + i).value.trim();
+    const menge = el("menge" + i).value.trim();
+
+    if (material && !menge) {
+      setzenStatus("Bitte für Material " + i + " auch eine Menge eingeben.", true);
+      return false;
+    }
+    if (!material && menge) {
+      setzenStatus("Bitte für Menge " + i + " auch eine Materialnummer eingeben.", true);
+      return false;
+    }
+
+    if (material && menge) {
+      const mengeNummer = Number(menge.replace(",", "."));
+      if (!Number.isFinite(mengeNummer) || mengeNummer <= 0) {
+        setzenStatus("Bitte eine gültige Menge bei Material " + i + " eingeben.", true);
+        return false;
+      }
+      positionen.push({ material, menge });
+    }
+  }
+
+  if (positionen.length === 0) {
+    setzenStatus("Bitte mindestens ein Material mit Menge eingeben.", true);
+    return false;
+  }
+
+  speichern();
+
+  let bodyText =
+    "Guten Tag,\n\n" +
+    "ich bitte um Durchführung der folgenden Materialumbuchung:\n\n" +
+    "━━━━━━━━━━━━━━━━━━━━\n" +
+    "MATERIALUMBUCHUNG\n" +
+    "━━━━━━━━━━━━━━━━━━━━\n\n" +
+    "Von Lager:  " + von + "\n" +
+    "Nach Lager: " + nach + "\n\n" +
+    "Materialien:\n\n";
+
+  positionen.forEach((p, index) => {
+    bodyText +=
+      (index + 1) + ". Materialnummer: " + p.material + "\n" +
+      "   Menge: " + p.menge + "\n\n";
+  });
+
+  bodyText +=
+    "━━━━━━━━━━━━━━━━━━━━\n\n" +
+    "Vielen Dank für die Bearbeitung.\n\n" +
+    "Freundliche Grüße";
+
+  const subject = encodeURIComponent("Materialumbuchung – " + positionen.map(p => p.material).join(", "));
+
+  el("emailButton").href =
+    "mailto:" + recipient +
+    "?subject=" + subject +
+    "&body=" + encodeURIComponent(bodyText);
+
+  return true;
+}
+
+el("emailButton").addEventListener("click", function(event) {
+  if (!senden()) {
+    event.preventDefault();
+  }
+});
+
+function loeschen() {
+  try {
+    localStorage.removeItem(KEY);
+  } catch (e) {
+    console.warn("Speicher konnte nicht gelöscht werden:", e);
+  }
+
+  ids.forEach(id => el(id).value = "");
+  setzenStatus("Eingaben gelöscht.");
+  el("von").focus();
+}
+
+ids.forEach(id => {
+  el(id).addEventListener("input", speichern);
+  el(id).addEventListener("change", speichern);
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Enter" && event.target.matches("input")) {
+    event.preventDefault();
+  }
+});
+
+laden();
+</script>
+</body>
+</html>
